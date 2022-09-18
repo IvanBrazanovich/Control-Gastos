@@ -1,7 +1,11 @@
 import { useState } from "react";
 import NuevoPresupuesto from "./components/NuevoPresupuesto";
+import ControlPresupuesto from "./components/ControlPresupuesto";
 
 function App() {
+  //States
+  const [presupuesto, setPresupuesto] = useState("");
+
   return (
     <div className="App h-screen relative p-0.5">
       <div className="upper-layout  absolute top-0 left-0 -z-40 h-[25rem] w-full bg-blue-500"></div>
@@ -9,7 +13,14 @@ function App() {
         Planificador de gastos
       </h1>
 
-      <NuevoPresupuesto />
+      {presupuesto ? (
+        <ControlPresupuesto presupuesto={presupuesto} />
+      ) : (
+        <NuevoPresupuesto
+          setPresupuesto={setPresupuesto}
+          presupuesto={presupuesto}
+        />
+      )}
     </div>
   );
 }
