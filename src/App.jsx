@@ -3,6 +3,7 @@ import NuevoPresupuesto from "./components/NuevoPresupuesto";
 import ControlPresupuesto from "./components/ControlPresupuesto";
 import nuevoGasto from "./img/nuevo-gasto.svg";
 import Modal from "./components/Modal";
+import ListadoGastos from "./components/ListadoGastos";
 
 function App() {
   //States
@@ -36,6 +37,8 @@ function App() {
           {modal && (
             <Modal gastos={gastos} setGastos={setGastos} setModal={setModal} />
           )}
+
+          <ListadoGastos gastos={gastos} />
         </>
       ) : (
         <>

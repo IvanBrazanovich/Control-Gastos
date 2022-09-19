@@ -25,6 +25,7 @@ const Modal = ({ gastos, setGastos, setModal }) => {
       nombre,
       categoria,
       cantidad,
+      fecha: new Date(),
     };
 
     //Crear un id para el gasto
@@ -39,7 +40,7 @@ const Modal = ({ gastos, setGastos, setModal }) => {
   };
 
   return (
-    <div className="modal  absolute top-0 left-0 h-screen w-screen z-10 bg-black/90 text-white ">
+    <div className="modal  fixed top-0 left-0 h-screen w-screen z-10 bg-black/90 text-white overflow- ">
       <form action="submit" className="container mx-auto w-96 mt-20">
         {errorGasto && <Message message="Todos los campos son obligatorios" />}
         <h2 className="uppercase text-center text-4xl  border-b-2 border-blue-600 p-3 my-5">
