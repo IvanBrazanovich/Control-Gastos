@@ -1,18 +1,24 @@
 import React, { useState } from "react";
 import Message from "./Message";
 
-const NuevoPresupuesto = ({ presupuesto, setPresupuesto }) => {
+const NuevoPresupuesto = ({
+  setPresupuesto,
+  isValidPresupuesto,
+  setIsValidPresupuesto,
+}) => {
   // States
   const [error, setError] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (presupuesto < 0) {
+    if (isValidPresupuesto < 0) {
       setError(true);
       return;
     }
 
     setError(false);
+    //Create presupuesto
+    setPresupuesto(isValidPresupuesto);
   };
 
   return (
@@ -27,8 +33,8 @@ const NuevoPresupuesto = ({ presupuesto, setPresupuesto }) => {
         <input
           className="container w-3/4 mx-auto block bg-slate-100 text-center py-3 text-2xl focus:outline-none"
           type="number"
-          value={presupuesto}
-          onChange={(e) => setPresupuesto(Number(e.target.value))}
+          value={isValidPresupuesto}
+          onChange={(e) => setIsValidPresupuesto(Number(e.target.value))}
         />
 
         <input

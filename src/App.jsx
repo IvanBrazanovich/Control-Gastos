@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NuevoPresupuesto from "./components/NuevoPresupuesto";
 import ControlPresupuesto from "./components/ControlPresupuesto";
+import nuevoGasto from "./img/nuevo-gasto.svg";
+import Modal from "./components/Modal";
 
 function App() {
   //States
   const [presupuesto, setPresupuesto] = useState("");
+  const [isValidPresupuesto, setIsValidPresupuesto] = useState(0);
+  const [gastos, setGastos] = useState([]);
+
+  const [modal, setModal] = useState(false);
+
+  //Funciones
 
   return (
     <div className="App h-screen relative p-0.5">
@@ -14,12 +22,29 @@ function App() {
       </h1>
 
       {presupuesto ? (
-        <ControlPresupuesto presupuesto={presupuesto} />
+        <>
+          <ControlPresupuesto gastos={gastos} presupuesto={presupuesto} />
+
+          {/* MODAL */}
+          <div
+            className="add-gasto absolute w-12 h-12 right-10 bottom-10 cursor-pointer"
+            onClick={() => setModal(true)}
+          >
+            <img src={nuevoGasto} alt="" />
+          </div>
+
+          {modal && (
+            <Modal gastos={gastos} setGastos={setGastos} setModal={setModal} />
+          )}
+        </>
       ) : (
-        <NuevoPresupuesto
-          setPresupuesto={setPresupuesto}
-          presupuesto={presupuesto}
-        />
+        <>
+          <NuevoPresupuesto
+            setPresupuesto={setPresupuesto}
+            setIsValidPresupuesto={setIsValidPresupuesto}
+            isValidPresupuesto={isValidPresupuesto}
+          />
+        </>
       )}
     </div>
   );
