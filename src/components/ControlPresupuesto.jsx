@@ -3,7 +3,7 @@ import { formatCurrency } from "../helpers";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-const ControlPresupuesto = ({ presupuesto, gastos }) => {
+const ControlPresupuesto = ({ presupuesto, gastos, resetApp }) => {
   const [disponible, setDisponible] = useState(0);
   const [gastado, setGastado] = useState(0);
   const [percentage, setPercentage] = useState(0);
@@ -57,7 +57,10 @@ const ControlPresupuesto = ({ presupuesto, gastos }) => {
           />
         </div>
         <div className="control-presupuesto">
-          <button className="bg-red-500 uppercase text-white w-full py-2 rounded-md font-black">
+          <button
+            className="bg-red-500 uppercase text-white w-full py-2 rounded-md font-black "
+            onClick={resetApp}
+          >
             Resetear app
           </button>
 

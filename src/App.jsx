@@ -37,6 +37,12 @@ function App() {
     setModal(true);
   };
 
+  const resetApp = () => {
+    setPresupuesto(0);
+    setGastos([]);
+    setIsValidPresupuesto(0);
+  };
+
   return (
     <div className="App h-screen relative p-0.5">
       <div className="upper-layout  absolute top-0 left-0 -z-40 h-[25rem] w-full bg-blue-500"></div>
@@ -46,7 +52,11 @@ function App() {
 
       {presupuesto ? (
         <>
-          <ControlPresupuesto gastos={gastos} presupuesto={presupuesto} />
+          <ControlPresupuesto
+            gastos={gastos}
+            presupuesto={presupuesto}
+            resetApp={resetApp}
+          />
 
           {/* MODAL */}
           <div
