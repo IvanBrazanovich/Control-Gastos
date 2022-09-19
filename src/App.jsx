@@ -7,12 +7,24 @@ import ListadoGastos from "./components/ListadoGastos";
 
 function App() {
   //States
-  const [presupuesto, setPresupuesto] = useState("");
+  const [presupuesto, setPresupuesto] = useState(
+    Number(localStorage.getItem("presupuesto")) ?? 0
+  );
   const [isValidPresupuesto, setIsValidPresupuesto] = useState(0);
-  const [gastos, setGastos] = useState([]);
+  const [gastos, setGastos] = useState(
+    JSON.parse(localStorage.getItem("gastos")) ?? []
+  );
   const [editando, setEditando] = useState({});
-
   const [modal, setModal] = useState(false);
+
+  //Insert local storage
+  useEffect(() => {
+    localStorage.setItem("gastos", JSON.stringify(gastos));
+  }, [gastos]);
+
+  useEffect(() => {
+    localStorage.setItem("presupuesto", JSON.stringify(presupuesto));
+  }, [presupuesto]);
 
   //Funciones
   const handleDelete = (id) => {
@@ -24,6 +36,7 @@ function App() {
     setEditando(gasto);
     setModal(true);
   };
+
   return (
     <div className="App h-screen relative p-0.5">
       <div className="upper-layout  absolute top-0 left-0 -z-40 h-[25rem] w-full bg-blue-500"></div>

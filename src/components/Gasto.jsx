@@ -9,7 +9,13 @@ import iconoAhorro from "../img/icono_ahorro.svg";
 import { formatCurrency } from "../helpers";
 
 const Gasto = ({ gasto, handleDelete, handleEdit }) => {
-  const { cantidad, nombre, categoria, fecha, id } = gasto;
+  const { cantidad, nombre, categoria, fecha: newFecha, id } = gasto;
+  let fecha;
+  if (typeof newFecha !== "object") {
+    fecha = new Date(Date.parse(newFecha));
+  } else {
+    fecha = newFecha;
+  }
 
   //Transform date data
   const options = {
