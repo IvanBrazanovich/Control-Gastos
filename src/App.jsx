@@ -4,6 +4,7 @@ import ControlPresupuesto from "./components/ControlPresupuesto";
 import nuevoGasto from "./img/nuevo-gasto.svg";
 import Modal from "./components/Modal";
 import ListadoGastos from "./components/ListadoGastos";
+import Filtro from "./components/Filtro";
 
 function App() {
   //States
@@ -16,6 +17,20 @@ function App() {
   );
   const [editando, setEditando] = useState({});
   const [modal, setModal] = useState(false);
+
+  const [filterArray, setFilterArray] = useState([]);
+  const [filter, setFilter] = useState();
+
+  //Filter
+  useEffect(() => {
+    if (filter) {
+      const newArray = gastos.filter((gasto) => gasto.categoria === filter);
+      setFilterArray(newArray, gastos);
+      return;
+    }
+
+    setFilterArray([]);
+  }, [filter]);
 
   //Insert local storage
   useEffect(() => {
@@ -76,8 +91,10 @@ function App() {
             />
           )}
 
+          <Filtro setFilter={setFilter} />
+
           <ListadoGastos
-            gastos={gastos}
+            gastos={filter ? filterArray : gastos}
             handleDelete={handleDelete}
             handleEdit={handleEdit}
           />
