@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { generateId } from "../helpers";
 import Message from "./Message";
+import cerrarIcon from "../img/cerrar.svg";
 
 const Modal = ({ gastos, setGastos, setModal, setEditando, editando }) => {
   const [nombre, setNombre] = useState("");
@@ -63,6 +64,17 @@ const Modal = ({ gastos, setGastos, setModal, setEditando, editando }) => {
 
   return (
     <div className="modal  fixed top-0 left-0 h-screen w-screen z-10 bg-black/90 text-white overflow- ">
+      <img
+        src={cerrarIcon}
+        className="h-8 w-8  fixed top-8 right-8 cursor-pointer"
+        onClick={() => {
+          setModal(false);
+          setCantidad("");
+          setNombre("");
+          setCategoria("");
+        }}
+        alt=""
+      />
       <form action="submit" className="container mx-auto w-96 mt-20">
         {errorGasto && <Message message="Todos los campos son obligatorios" />}
         <h2 className="uppercase text-center text-4xl  border-b-2 border-blue-600 p-3 my-5">
