@@ -28,7 +28,7 @@ function App() {
 
           {/* MODAL */}
           <div
-            className="add-gasto absolute w-12 h-12 right-10 bottom-10 cursor-pointer"
+            className="add-gasto fixed w-12 h-12 right-10 bottom-10 cursor-pointer"
             onClick={() => setModal(true)}
           >
             <img src={nuevoGasto} alt="" />
