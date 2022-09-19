@@ -56,6 +56,7 @@ function App() {
     setPresupuesto(0);
     setGastos([]);
     setIsValidPresupuesto(0);
+    setFilterArray([]);
   };
 
   return (
