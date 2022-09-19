@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { generateId } from "../helpers";
 import Message from "./Message";
 
-const Modal = ({ gastos, setGastos, setModal }) => {
+const Modal = ({ gastos, setGastos, setModal, setEditando, editando }) => {
   const [nombre, setNombre] = useState("");
   const [categoria, setCategoria] = useState("");
   const [cantidad, setCantidad] = useState("");
   const [errorGasto, setErrorGasto] = useState(false);
+
+  useEffect(() => {
+    if (Object.keys(editando).length > 0) {
+      setCantidad(editando.cantidad);
+      setNombre(editando.nombre);
+      setCategoria(editando.categoria);
+    }
+  }, [editando]);
 
   //Funciones
   const handleNuevoGasto = (e) => {
@@ -28,15 +36,29 @@ const Modal = ({ gastos, setGastos, setModal }) => {
       fecha: new Date(),
     };
 
-    //Crear un id para el gasto
-    const id = generateId();
-    gastoObj.id = id;
+    //Editing Mode
+    if (editando.id) {
+      gastoObj.id = editando.id;
+      const newArr = gastos.map((gasto) =>
+        gasto.id == editando.id ? gastoObj : gasto
+      );
+      setGastos(newArr);
+    } else {
+      //Crear un id para el gasto
+      const id = generateId();
+      gastoObj.id = id;
+      //Añadir al array de gastos
+      setGastos([...gastos, gastoObj]);
+    }
 
-    //Añadir al array de gastos
-    setGastos([...gastos, gastoObj]);
-
-    //Close Modal
+    //Close Modal and set editing mode to false
     setModal(false);
+    setEditando({});
+
+    //Volver los state a lo normal
+    setCantidad("");
+    setNombre("");
+    setCategoria("");
   };
 
   return (

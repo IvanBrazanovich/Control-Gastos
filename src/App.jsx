@@ -10,6 +10,7 @@ function App() {
   const [presupuesto, setPresupuesto] = useState("");
   const [isValidPresupuesto, setIsValidPresupuesto] = useState(0);
   const [gastos, setGastos] = useState([]);
+  const [editando, setEditando] = useState({});
 
   const [modal, setModal] = useState(false);
 
@@ -20,7 +21,8 @@ function App() {
   };
 
   const handleEdit = (gasto) => {
-    console.log("editado brother");
+    setEditando(gasto);
+    setModal(true);
   };
   return (
     <div className="App h-screen relative p-0.5">
@@ -42,7 +44,13 @@ function App() {
           </div>
 
           {modal && (
-            <Modal gastos={gastos} setGastos={setGastos} setModal={setModal} />
+            <Modal
+              editando={editando}
+              setEditando={setEditando}
+              gastos={gastos}
+              setGastos={setGastos}
+              setModal={setModal}
+            />
           )}
 
           <ListadoGastos
