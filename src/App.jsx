@@ -14,7 +14,14 @@ function App() {
   const [modal, setModal] = useState(false);
 
   //Funciones
+  const handleDelete = (id) => {
+    const newArr = gastos.filter((gasto) => gasto.id !== id);
+    setGastos(newArr);
+  };
 
+  const handleEdit = (gasto) => {
+    console.log("editado brother");
+  };
   return (
     <div className="App h-screen relative p-0.5">
       <div className="upper-layout  absolute top-0 left-0 -z-40 h-[25rem] w-full bg-blue-500"></div>
@@ -38,7 +45,11 @@ function App() {
             <Modal gastos={gastos} setGastos={setGastos} setModal={setModal} />
           )}
 
-          <ListadoGastos gastos={gastos} />
+          <ListadoGastos
+            gastos={gastos}
+            handleDelete={handleDelete}
+            handleEdit={handleEdit}
+          />
         </>
       ) : (
         <>

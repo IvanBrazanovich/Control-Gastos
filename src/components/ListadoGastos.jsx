@@ -1,13 +1,20 @@
 import React from "react";
 import Gasto from "./Gasto";
 
-const ListadoGastos = ({ gastos }) => {
+const ListadoGastos = ({ gastos, handleDelete, handleEdit }) => {
   return (
     <div className="mx-auto container w-3/5  my-14">
       {gastos.length > 0 ? (
         <div className="  ">
           {gastos.map((gasto) => {
-            return <Gasto key={gasto.id} gasto={gasto} />;
+            return (
+              <Gasto
+                handleDelete={handleDelete}
+                handleEdit={handleEdit}
+                key={gasto.id}
+                gasto={gasto}
+              />
+            );
           })}
         </div>
       ) : (
